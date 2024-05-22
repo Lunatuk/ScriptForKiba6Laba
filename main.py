@@ -2,12 +2,11 @@ def get_command_number(command):
     commands = {
             "сложение": 1,
             "вычитание": 2,
-            "умножение": 3,
-            "деление": 4,
+            "умножение": 5,
+            "деление": 6,
             "запись": 7
         }
     return commands.get(command.lower())
-
 
 def main():
     while True:
@@ -31,7 +30,10 @@ def main():
         output = ["v2.0 raw"]
 
         # Первая строка: номер команды и форматирование
-        line1 = ["0", f"{command_number}10", f"{command_number}11", "0712", "12*0"]
+        if command_number in {5, 6}:  # Для умножения и деления
+            line1 = ["0", "10", f"{command_number}11", "0712", "12*0"]
+        else:  # Для сложения и вычитания
+            line1 = ["0", f"{command_number}10", f"{command_number}11", "0712", "12*0"]
         output.append(" ".join(line1))
 
         # Вторая строка: введенные числа и оставшиеся ячейки
@@ -44,7 +46,6 @@ def main():
 
         print("Данные успешно записаны в output")
         break
-
 
 if __name__ == "__main__":
     main()
